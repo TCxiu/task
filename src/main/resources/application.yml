@@ -1,0 +1,35 @@
+server.port: 8087
+
+### jpa
+spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+###quartz
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: embedded
+  application:
+      name: @project.artifactId@
+
+info:
+    app:
+        name: ${spring.application.name}
+        version: V1.0
+    build:
+        artifactId: @project.artifactId@
+    version: V1.0
+
+eureka:
+    instance:
+#租期到期时间，默认90秒
+      lease-expiration-duration-in-seconds: 60
+  #租赁更新时间间隔，默认30，即30秒发送一次心跳
+      lease-renewal-interval-in-seconds: 30
+      prefer-ip-address: true
+    client:
+      serviceUrl:
+        defaultZone: http://root:123@localhost:9091/eureka/,http://root:123@localhost:9092/eureka/,
